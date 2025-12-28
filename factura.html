@@ -84,12 +84,7 @@ body {
     font-size: 13px;
 }
 
-.item {
-    display: flex;
-}
-
-.item span.label {
-    width: 150px;
+.item span {
     font-weight: bold;
 }
 
@@ -105,10 +100,6 @@ table th,
 table td {
     border: 1px solid #000;
     padding: 6px;
-}
-
-table th {
-    text-align: left;
 }
 
 .total-row {
@@ -135,10 +126,6 @@ table th {
 
 /* ===== IMPRESIÓN ===== */
 @media print {
-    .ticket {
-        padding: 10mm;
-    }
-
     @page {
         size: A4;
         margin: 10mm;
@@ -153,7 +140,7 @@ table th {
 
     <!-- ENCABEZADO -->
     <div class="header">
-        <img src="https://fundicionestorres.com/wp-content/uploads/2019/11/LogoCadasa-207X118-1.png" alt="Logo">
+        <img src="https://fundicionestorres.com/wp-content/uploads/2019/11/LogoCadasa-207X118-1.png">
 
         <div class="header-text">
             <h1>Central Azucarero de Alanje S.A.</h1>
@@ -161,7 +148,7 @@ table th {
         </div>
 
         <div class="factura-box">
-            GUÍA No.<br>
+            No.<br>
             <span data-field="numero_guia"></span>
         </div>
     </div>
@@ -170,12 +157,12 @@ table th {
     <div class="section">
         <div class="section-title">Información General</div>
         <div class="grid">
-            <div class="item"><span class="label">Producto:</span> <span data-field="producto"></span></div>
-            <div class="item"><span class="label">Proveedor:</span> <span data-field="proveedor"></span></div>
-            <div class="item"><span class="label">Variedad:</span> <span data-field="variedad"></span></div>
-            <div class="item"><span class="label">Subdivisión:</span> <span data-field="subdivision"></span></div>
-            <div class="item"><span class="label">UP:</span> <span data-field="up"></span></div>
-            <div class="item"><span class="label">Frente:</span> <span data-field="frente"></span></div>
+            <div class="item"><span>Producto:</span> <span data-field="producto"></span></div>
+            <div class="item"><span>Proveedor:</span> <span data-field="proveedor"></span></div>
+            <div class="item"><span>Variedad:</span> <span data-field="variedad"></span></div>
+            <div class="item"><span>Subdivisión:</span> <span data-field="subdivision"></span></div>
+            <div class="item"><span>UP:</span> <span data-field="up"></span></div>
+            <div class="item"><span>Frente:</span> <span data-field="frente"></span></div>
         </div>
     </div>
 
@@ -183,10 +170,10 @@ table th {
     <div class="section">
         <div class="section-title">Control de Tiempo</div>
         <div class="grid">
-            <div class="item"><span class="label">Fecha:</span> <span data-field="fecha"></span></div>
-            <div class="item"><span class="label">Día Zafra:</span> <span data-field="dia_zafra"></span></div>
-            <div class="item"><span class="label">Hora Entrada:</span> <span data-field="hora_entrada"></span></div>
-            <div class="item"><span class="label">Hora Salida:</span> <span data-field="hora_salida"></span></div>
+            <div class="item"><span>Fecha:</span> <span data-field="fecha"></span></div>
+            <div class="item"><span>Día Zafra:</span> <span data-field="dia_zafra"></span></div>
+            <div class="item"><span>Hora Entrada:</span> <span data-field="hora_entrada"></span></div>
+            <div class="item"><span>Hora Salida:</span> <span data-field="hora_salida"></span></div>
         </div>
     </div>
 
@@ -194,10 +181,10 @@ table th {
     <div class="section">
         <div class="section-title">Datos de Transporte</div>
         <div class="grid">
-            <div class="item"><span class="label">Placa / Equipo:</span> <span data-field="placa"></span></div>
-            <div class="item"><span class="label">Transportista:</span> <span data-field="transportista"></span></div>
-            <div class="item"><span class="label">Contrato:</span> <span data-field="contrato"></span></div>
-            <div class="item"><span class="label">Guía No:</span> <span data-field="numero_guia"></span></div>
+            <div class="item"><span>Placa / Equipo:</span> <span data-field="placa"></span></div>
+            <div class="item"><span>Transportista:</span> <span data-field="transportista"></span></div>
+            <div class="item"><span>Contrato:</span> <span data-field="contrato"></span></div>
+            <div class="item"><span>Guía No:</span> <span data-field="numero_guia"></span></div>
         </div>
     </div>
 
@@ -205,22 +192,10 @@ table th {
     <div class="section">
         <div class="section-title">Detalle de Pesos</div>
         <table>
-            <tr>
-                <th>Descripción</th>
-                <th>Peso (kg)</th>
-            </tr>
-            <tr>
-                <td>Peso Bruto</td>
-                <td data-field="peso_bruto"></td>
-            </tr>
-            <tr>
-                <td>Tara</td>
-                <td data-field="tara"></td>
-            </tr>
-            <tr class="total-row">
-                <td>Peso Neto</td>
-                <td data-field="peso_neto"></td>
-            </tr>
+            <tr><th>Descripción</th><th>Peso (kg)</th></tr>
+            <tr><td>Peso Bruto</td><td data-field="peso_bruto"></td></tr>
+            <tr><td>Tara</td><td data-field="tara"></td></tr>
+            <tr class="total-row"><td>Peso Neto</td><td data-field="peso_neto"></td></tr>
         </table>
     </div>
 
@@ -238,24 +213,33 @@ table th {
 </div>
 
 <script>
-/* ===== LECTURA SEGURA DE PARÁMETROS ===== */
-function cargarParametros() {
-    const params = new URLSearchParams(window.location.search);
+/* ===== LECTURA DE PARÁMETROS ===== */
+function getParams() {
+    const params = {};
+    const query = new URLSearchParams(window.location.search);
+    query.forEach((value, key) => {
+        params[key] = value;
+    });
+    return params;
+}
 
+/* ===== INYECCIÓN SEGURA ===== */
+function fillData() {
+    const params = getParams();
     document.querySelectorAll("[data-field]").forEach(el => {
-        const key = el.getAttribute("data-field");
-        if (params.has(key)) {
-            el.textContent = params.get(key);
+        const field = el.getAttribute("data-field");
+        if (params[field]) {
+            el.textContent = params[field];
         }
     });
 }
 
 /* ===== AUTO IMPRESIÓN ===== */
-window.onload = function () {
-    cargarParametros();
+window.onload = () => {
+    fillData();
     setTimeout(() => {
         window.print();
-    }, 400);
+    }, 600);
 };
 </script>
 
