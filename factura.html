@@ -13,15 +13,18 @@
 
 body {
     margin: 0;
-    padding: 0;
     background: #fff;
+}
+
+/* ===== TAMAÑO PAPEL 25 x 15 CM ===== */
+@page {
+    size: 15cm 25cm;
+    margin: 5mm;
 }
 
 .ticket {
     width: 100%;
-    max-width: 850px;
-    margin: auto;
-    padding: 20px;
+    padding: 5mm;
 }
 
 /* ===== ENCABEZADO ===== */
@@ -29,13 +32,13 @@ body {
     display: flex;
     align-items: center;
     border-bottom: 2px solid #000;
-    padding-bottom: 10px;
-    margin-bottom: 15px;
+    padding-bottom: 6px;
+    margin-bottom: 8px;
 }
 
 .header img {
-    height: 70px;
-    margin-right: 20px;
+    height: 55px;
+    margin-right: 10px;
 }
 
 .header-text {
@@ -44,44 +47,43 @@ body {
 }
 
 .header-text h1 {
-    font-size: 18px;
+    font-size: 14px;
     margin: 0;
     text-transform: uppercase;
 }
 
 .header-text p {
-    margin: 3px 0;
-    font-size: 13px;
+    margin: 2px 0;
+    font-size: 11px;
 }
 
 /* ===== FACTURA ===== */
 .factura-box {
     border: 2px solid #000;
-    padding: 6px 10px;
+    padding: 4px 6px;
     text-align: center;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
-    min-width: 140px;
 }
 
 /* ===== SECCIONES ===== */
 .section {
-    margin-bottom: 10px;
+    margin-bottom: 6px;
 }
 
 .section-title {
-    font-size: 13px;
+    font-size: 11px;
     font-weight: bold;
     border-bottom: 1px solid #000;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
     text-transform: uppercase;
 }
 
 .grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    font-size: 13px;
+    gap: 4px;
+    font-size: 11px;
 }
 
 .item span {
@@ -92,14 +94,13 @@ body {
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
-    font-size: 13px;
+    font-size: 11px;
 }
 
 table th,
 table td {
     border: 1px solid #000;
-    padding: 6px;
+    padding: 4px;
 }
 
 .total-row {
@@ -108,28 +109,30 @@ table td {
 
 /* ===== TOTAL ===== */
 .total {
-    margin-top: 10px;
+    margin-top: 6px;
     text-align: right;
-    font-size: 15px;
+    font-size: 12px;
     font-weight: bold;
+}
+
+/* ===== QR ===== */
+.qr {
+    margin-top: 6px;
+    text-align: center;
+}
+
+.qr img {
+    width: 90px;
 }
 
 /* ===== PIE ===== */
 .footer {
-    margin-top: 20px;
+    margin-top: 8px;
     border-top: 1px solid #000;
-    padding-top: 8px;
+    padding-top: 4px;
+    font-size: 10px;
     display: flex;
     justify-content: space-between;
-    font-size: 12px;
-}
-
-/* ===== IMPRESIÓN ===== */
-@media print {
-    @page {
-        size: A4;
-        margin: 10mm;
-    }
 }
 </style>
 </head>
@@ -148,12 +151,12 @@ table td {
         </div>
 
         <div class="factura-box">
-            No.<br>
+            GUÍA<br>
             <span data-field="numero_guia"></span>
         </div>
     </div>
 
-    <!-- INFORMACIÓN GENERAL -->
+    <!-- INFO GENERAL -->
     <div class="section">
         <div class="section-title">Información General</div>
         <div class="grid">
@@ -166,80 +169,85 @@ table td {
         </div>
     </div>
 
-    <!-- FECHAS -->
+    <!-- TIEMPOS -->
     <div class="section">
         <div class="section-title">Control de Tiempo</div>
         <div class="grid">
             <div class="item"><span>Fecha:</span> <span data-field="fecha"></span></div>
             <div class="item"><span>Día Zafra:</span> <span data-field="dia_zafra"></span></div>
-            <div class="item"><span>Hora Entrada:</span> <span data-field="hora_entrada"></span></div>
-            <div class="item"><span>Hora Salida:</span> <span data-field="hora_salida"></span></div>
+            <div class="item"><span>Entrada:</span> <span data-field="hora_entrada"></span></div>
+            <div class="item"><span>Salida:</span> <span data-field="hora_salida"></span></div>
         </div>
     </div>
 
     <!-- TRANSPORTE -->
     <div class="section">
-        <div class="section-title">Datos de Transporte</div>
+        <div class="section-title">Transporte</div>
         <div class="grid">
-            <div class="item"><span>Placa / Equipo:</span> <span data-field="placa"></span></div>
+            <div class="item"><span>Placa:</span> <span data-field="placa"></span></div>
             <div class="item"><span>Transportista:</span> <span data-field="transportista"></span></div>
             <div class="item"><span>Contrato:</span> <span data-field="contrato"></span></div>
-            <div class="item"><span>Guía No:</span> <span data-field="numero_guia"></span></div>
+            <div class="item"><span>Equipo:</span> <span data-field="equipo"></span></div>
         </div>
     </div>
 
     <!-- PESOS -->
     <div class="section">
-        <div class="section-title">Detalle de Pesos</div>
+        <div class="section-title">Pesos</div>
         <table>
-            <tr><th>Descripción</th><th>Peso (kg)</th></tr>
-            <tr><td>Peso Bruto</td><td data-field="peso_bruto"></td></tr>
+            <tr><th>Tipo</th><th>Kg</th></tr>
+            <tr><td>Bruto</td><td data-field="peso_bruto"></td></tr>
             <tr><td>Tara</td><td data-field="tara"></td></tr>
-            <tr class="total-row"><td>Peso Neto</td><td data-field="peso_neto"></td></tr>
+            <tr class="total-row"><td>Neto</td><td data-field="peso_neto"></td></tr>
         </table>
     </div>
 
     <!-- TOTAL -->
     <div class="total">
-        TOTAL: <span data-field="toneladas"></span> TONELADAS
+        TOTAL: <span data-field="toneladas"></span> TON
+    </div>
+
+    <!-- QR -->
+    <div class="qr">
+        <img id="qr">
+        <div>Guía: <span data-field="numero_guia"></span></div>
     </div>
 
     <!-- PIE -->
     <div class="footer">
-        <div><strong>Pesador:</strong> <span data-field="pesador"></span></div>
-        <div>Documento generado automáticamente</div>
+        <div>Pesador: <span data-field="pesador"></span></div>
+        <div>Generado automáticamente</div>
     </div>
 
 </div>
 
 <script>
-/* ===== LECTURA DE PARÁMETROS ===== */
+/* ===== PARAMETROS URL ===== */
 function getParams() {
     const params = {};
-    const query = new URLSearchParams(window.location.search);
-    query.forEach((value, key) => {
-        params[key] = value;
-    });
+    new URLSearchParams(window.location.search).forEach((v, k) => params[k] = v);
     return params;
 }
 
-/* ===== INYECCIÓN SEGURA ===== */
+/* ===== INYECTAR DATOS ===== */
 function fillData() {
-    const params = getParams();
+    const p = getParams();
     document.querySelectorAll("[data-field]").forEach(el => {
-        const field = el.getAttribute("data-field");
-        if (params[field]) {
-            el.textContent = params[field];
-        }
+        const f = el.dataset.field;
+        if (p[f]) el.textContent = p[f];
     });
+
+    if (p.numero_guia) {
+        document.getElementById("qr").src =
+            "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" +
+            encodeURIComponent(p.numero_guia);
+    }
 }
 
-/* ===== AUTO IMPRESIÓN ===== */
+/* ===== IMPRIMIR ===== */
 window.onload = () => {
     fillData();
-    setTimeout(() => {
-        window.print();
-    }, 600);
+    setTimeout(() => window.print(), 700);
 };
 </script>
 
