@@ -226,9 +226,12 @@ function getParams() {
 
 function fillData() {
     const p = getParams();
+
     document.querySelectorAll("[data-field]").forEach(el => {
         const field = el.dataset.field;
-        if (p[field]) el.textContent = p[field];
+        if (p[field] !== undefined) {
+            el.textContent = decodeURIComponent(p[field]);
+        }
     });
 
     if (p.numero_guia) {
@@ -240,8 +243,14 @@ function fillData() {
 
 window.onload = () => {
     fillData();
+
+    // ABRIR DIÁLOGO DE IMPRESIÓN
+    setTimeout(() => {
+        window.print();
+    }, 500);
 };
 </script>
+
 
 </body>
 </html>
