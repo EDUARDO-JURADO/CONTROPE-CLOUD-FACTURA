@@ -68,8 +68,8 @@ body {
 
 /* ===== QR ===== */
 .qr-header img {
-    width: 55px;
-    height: 55px;
+    width: 60px;
+    height: 60px;
 }
 
 /* ===== SECCIONES ===== */
@@ -96,20 +96,17 @@ body {
     font-weight: bold;
 }
 
-/* ===== TABLA ===== */
-table {
-    width: 100%;
-    border-collapse: collapse;
+/* ===== PESOS SIMPLIFICADOS ===== */
+.pesos-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4px;
     font-size: 11px;
+    margin-top: 4px;
 }
 
-table th, table td {
-    border: 1px solid #000;
-    padding: 4px;
-}
-
-.total-row {
-    font-weight: bold;
+.pesos-grid .item span {
+    display: block;
 }
 
 /* ===== TOTAL ===== */
@@ -138,24 +135,18 @@ table th, table td {
 
     <!-- ENCABEZADO -->
     <div class="header">
-
-        <img class="logo"
-             src="https://fundicionestorres.com/wp-content/uploads/2019/11/LogoCadasa-207X118-1.png">
-
+        <img class="logo" src="https://fundicionestorres.com/wp-content/uploads/2019/11/LogoCadasa-207X118-1.png">
         <div class="header-text">
             <h1>Central Azucarero de Alanje S.A.</h1>
             <p>Guía de Transporte de Caña / Pesaje</p>
-
             <div class="factura-box">
                 No.<br>
                 <span data-field="numero_guia"></span>
             </div>
         </div>
-
         <div class="qr-header">
             <img id="qr" src="">
         </div>
-
     </div>
 
     <!-- INFORMACIÓN GENERAL -->
@@ -184,29 +175,51 @@ table th, table td {
 
     <!-- TRANSPORTE -->
     <div class="section">
-        <div class="section-title">Transporte</div>
+        <div class="section-title">Transporte General</div>
         <div class="grid">
             <div class="item"><span>Placa:</span> <span data-field="placa"></span></div>
             <div class="item"><span>Transportista:</span> <span data-field="transportista"></span></div>
             <div class="item"><span>Contrato:</span> <span data-field="contrato"></span></div>
             <div class="item"><span>Equipo:</span> <span data-field="equipo"></span></div>
         </div>
+
+        <div class="section-title">Vehículos de Carga</div>
+        <div class="grid">
+            <div class="item"><span>Cha1:</span> <span data-field="cha1"></span></div>
+            <div class="item"><span>Cha2:</span> <span data-field="cha2"></span></div>
+  
+            <div class="item"><span>Caja1:</span> <span data-field="caja1"></span></div>
+            <div class="item"><span>Caja2:</span> <span data-field="caja2"></span></div>
+        </div>
+
+        <div class="section-title">Tractores</div>
+        <div class="grid">
+            <div class="item"><span>Tractor1:</span> <span data-field="tractor1"></span></div>
+            <div class="item"><span>Empleado Tractor1:</span> <span data-field="empleado_tractor1"></span></div>
+            <div class="item"><span>Tractor2:</span> <span data-field="tractor2"></span></div>
+            <div class="item"><span>Empleado Tractor2:</span> <span data-field="empleado_tractor2"></span></div>
+        </div>
+
+        <div class="section-title">Montacargas</div>
+        <div class="grid">
+            <div class="item"><span>Montacargas:</span> <span data-field="montacargas"></span></div>
+            <div class="item"><span>Empleado Montacargas:</span> <span data-field="empleado_montacargas"></span></div>
+        </div>
     </div>
 
-    <!-- PESOS -->
+    <!-- PESOS SIMPLIFICADOS -->
     <div class="section">
         <div class="section-title">Pesos</div>
-        <table>
-            <tr><th>Tipo</th><th>Kg</th></tr>
-            <tr><td>Bruto</td><td data-field="peso_bruto"></td></tr>
-            <tr><td>Tara</td><td data-field="tara"></td></tr>
-            <tr class="total-row"><td>Neto</td><td data-field="peso_neto"></td></tr>
-        </table>
+        <div class="pesos-grid">
+            <div class="item"><span>Bruto:</span> <span data-field="peso_bruto"></span> Kg</div>
+            <div class="item"><span>Tara:</span> <span data-field="tara"></span> Kg</div>
+            <div class="item"><span>Neto:</span> <span data-field="peso_neto"></span> Kg</div>
+        </div>
     </div>
 
     <!-- TOTAL -->
     <div class="total">
-        Total: <span data-field="toneladas"></span>
+        Total: <span data-field="toneladas"></span> Ton
     </div>
 
     <!-- PIE -->
@@ -235,22 +248,24 @@ function fillData() {
     });
 
     if (p.numero_guia) {
-        document.getElementById("qr").src =
-            "https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=" +
-            encodeURIComponent(p.numero_guia);
+        const qrImg = document.getElementById("qr");
+        qrImg.src = "https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=" + encodeURIComponent(p.numero_guia);
+
+        // Esperar que la imagen cargue antes de imprimir
+        qrImg.onload = () => {
+            setTimeout(() => {
+                window.print();
+            }, 200);
+        };
+    } else {
+        setTimeout(() => {
+            window.print();
+        }, 200);
     }
 }
 
-window.onload = () => {
-    fillData();
-
-    // ABRIR DIÁLOGO DE IMPRESIÓN
-    setTimeout(() => {
-        window.print();
-    }, 500);
-};
+window.onload = fillData;
 </script>
-
 
 </body>
 </html>
