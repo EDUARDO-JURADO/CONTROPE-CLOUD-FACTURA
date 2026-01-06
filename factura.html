@@ -3,207 +3,261 @@
 <head>
 <meta charset="UTF-8">
 <title>Guía de Control de Pesaje</title>
+
 <style>
-* {
-    box-sizing: border-box;
-    font-family: "Times New Roman", Georgia, serif;
-    color: #000;
+*{
+    box-sizing:border-box;
+    font-family:"Times New Roman", Georgia, serif;
+    color:#000;
 }
-body {
-    margin: 0;
-    background: #fff;
+
+body{
+    margin:0;
+    background:#fff;
 }
-@page {
-    margin: 5mm;
+
+@page{
+    margin:5mm;
 }
-.ticket {
-    width: 100%;
-    padding: 5mm;
+
+.ticket{
+    width:100%;
+    padding:5mm;
 }
-/* ENCABEZADO */
-.header {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-    border-bottom: 2px solid #000;
-    padding-bottom: 6px;
-    margin-bottom: 10px;
-    gap: 8px;
+
+/* ================= ENCABEZADO ================= */
+.header{
+    display:grid;
+    grid-template-columns:auto 1fr auto;
+    align-items:center;
+    border-bottom:2px solid #000;
+    padding-bottom:6px;
+    margin-bottom:8px;
+    gap:8px;
 }
-.header img.logo { height: 50px; }
-.header-text { text-align: center; }
-.header-text h1 { font-size: 14px; margin: 0; text-transform: uppercase; }
-.header-text p { margin: 2px 0; font-size: 11px; }
-.factura-box {
-    border: 2px solid #000;
-    padding: 4px 6px;
-    text-align: center;
-    font-size: 11px;
-    font-weight: bold;
+
+.header img.logo{height:50px;}
+
+.header-text{text-align:center;}
+
+.header-text h1{
+    font-size:14px;
+    margin:0;
+    text-transform:uppercase;
 }
-.qr-header img { width: 60px; height: 60px; }
-/* SECCIONES */
-.section {
-    margin-bottom: 6px;
-    padding: 6px;
-    border: 1px solid #000;
-    border-radius: 6px;
-    box-shadow: 1px 1px 4px #ccc;
+
+.header-text p{
+    margin:2px 0;
+    font-size:11px;
 }
-.section-title {
-    font-size: 12px;
-    font-weight: bold;
-    margin-bottom: 4px;
-    text-transform: uppercase;
-    border-bottom: 1px solid #000;
-    padding-bottom: 2px;
+
+.factura-box{
+    border:2px solid #000;
+    padding:4px 6px;
+    text-align:center;
+    font-size:11px;
+    font-weight:bold;
+    display:inline-block;
+    margin-top:4px;
 }
-.grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6px;
-    font-size: 11px;
+
+.qr-header img{
+    width:60px;
+    height:60px;
 }
-.item span { font-weight: bold; }
-/* PESOS */
-.pesos-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 4px;
-    font-size: 11px;
-    margin-top: 4px;
+
+/* ================= SECCIONES ================= */
+.section{
+    margin-bottom:6px;
+    padding:6px;
+    border:1px solid #000;
+    border-radius:6px;
+    box-shadow:1px 1px 4px #ccc;
 }
-.pesos-grid .item span { display: block; }
-/* TOTAL */
-.total {
-    margin-top: 8px;
-    text-align: right;
-    font-size: 12px;
-    font-weight: bold;
+
+.section-title{
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:4px;
+    text-transform:uppercase;
+    border-bottom:1px solid #000;
+    padding-bottom:2px;
 }
-/* PIE */
-.footer {
-    margin-top: 8px;
-    border-top: 1px solid #000;
-    padding-top: 4px;
-    font-size: 10px;
-    display: flex;
-    justify-content: space-between;
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:6px;
+    font-size:11px;
+}
+
+.item span{font-weight:bold;}
+
+/* ================= PESOS ================= */
+.pesos-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:4px;
+    font-size:11px;
+}
+
+/* ================= TOTAL TONELADAS (ESQUINA) ================= */
+.total{
+    margin-top:6px;
+    text-align:right;
+    font-weight:bold;
+}
+
+.total .label{
+    font-size:13px;
+}
+
+.total .valor{
+    font-size:28px;
+    line-height:1;
+}
+
+.total .unidad{
+    font-size:14px;
+}
+
+/* ================= PIE ================= */
+.footer{
+    margin-top:8px;
+    border-top:1px solid #000;
+    padding-top:4px;
+    font-size:10px;
+    display:flex;
+    justify-content:space-between;
 }
 </style>
 </head>
-<body>
 
+<body>
 <div class="ticket">
 
-    <!-- ENCABEZADO -->
-    <div class="header">
-        <img class="logo" src="https://fundicionestorres.com/wp-content/uploads/2019/11/LogoCadasa-207X118-1.png">
-        <div class="header-text">
-            <h1>Central Azucarero de Alanje S.A.</h1>
-            <p>Guía de Transporte de Caña / Pesaje</p>
-            <div class="factura-box">
-                No.<br>
-                <span data-field="numero_guia"></span>
-            </div>
-        </div>
-        <div class="qr-header">
-            <img id="qr" src="">
+<!-- ================= ENCABEZADO ================= -->
+<div class="header">
+    <img class="logo" src="https://fundicionestorres.com/wp-content/uploads/2019/11/LogoCadasa-207X118-1.png">
+
+    <div class="header-text">
+        <h1>Central Azucarero de Alanje S.A.</h1>
+        <p>Guía de Transporte de Caña / Pesaje</p>
+        <div class="factura-box">
+            No.<br>
+            <span data-field="numero_guia"></span>
         </div>
     </div>
 
-    <!-- INFORMACIÓN GENERAL -->
-    <div class="section">
-        <div class="section-title">Información General</div>
-        <div class="grid">
-            <div class="item"><span>Producto:</span> <span data-field="producto"></span></div>
-            <div class="item"><span>Proveedor:</span> <span data-field="proveedor"></span></div>
-            <div class="item"><span>Variedad:</span> <span data-field="variedad"></span></div>
-            <div class="item"><span>Subdivisión:</span> <span data-field="subdivision"></span></div>
-            <div class="item"><span>UP:</span> <span data-field="up"></span></div>
-            <div class="item"><span>Frente:</span> <span data-field="frente"></span></div>
-        </div>
+    <div class="qr-header">
+        <img id="qr" src="">
     </div>
+</div>
 
-    <!-- CONTROL DE TIEMPO -->
-    <div class="section">
-        <div class="section-title">Control de Tiempo</div>
-        <div class="grid">
-            <div class="item"><span>Fecha:</span> <span data-field="fecha"></span></div>
-            <div class="item"><span>Día Zafra:</span> <span data-field="dia_zafra"></span></div>
-            <div class="item"><span>Entrada:</span> <span data-field="hora_entrada"></span></div>
-            <div class="item"><span>Salida:</span> <span data-field="hora_salida"></span></div>
-        </div>
+<!-- ================= INFORMACIÓN GENERAL ================= -->
+<div class="section">
+    <div class="section-title">Información General</div>
+    <div class="grid">
+        <div class="item"><span>Producto:</span> <span data-field="producto"></span></div>
+        <div class="item"><span>Proveedor:</span> <span data-field="proveedor"></span></div>
+        <div class="item"><span>Variedad:</span> <span data-field="variedad"></span></div>
+        <div class="item"><span>Subdivisión:</span> <span data-field="subdivision"></span></div>
+        <div class="item"><span>UP:</span> <span data-field="up"></span></div>
+        <div class="item"><span>Frente:</span> <span data-field="frente"></span></div>
     </div>
+</div>
 
-    <!-- TRANSPORTE -->
-    <div class="section">
-        <div class="section-title">Transporte</div>
-        <div class="grid">
-            <div class="item"><span>Placa:</span> <span data-field="placa"></span></div>
-            <div class="item"><span>Transportista:</span> <span data-field="transportista"></span></div>
-            <div class="item"><span>Contrato:</span> <span data-field="contrato"></span></div>
-            <div class="item"><span>Equipo:</span> <span data-field="equipo"></span></div>
-            <div class="item"><span>Cha1:</span> <span data-field="cha1"></span></div>
-            <div class="item"><span>Cha2:</span> <span data-field="cha2"></span></div>
-          
-
-            <div class="item"><span>Caja1:</span> <span data-field="caja1"></span></div>
-            <div class="item"><span>Caja2:</span> <span data-field="caja2"></span></div>
-            <div class="item"><span>Tractor1:</span> <span data-field="tractor1"></span></div>
-            <div class="item"><span>Empleado Tractor1:</span> <span data-field="empleado_tractor1"></span></div>
-            <div class="item"><span>Tractor2:</span> <span data-field="tractor2"></span></div>
-            <div class="item"><span>Empleado Tractor2:</span> <span data-field="empleado_tractor2"></span></div>
-            <div class="item"><span>Montacargas:</span> <span data-field="montacargas"></span></div>
-            <div class="item"><span>Empleado Montacargas:</span> <span data-field="empleado_montacargas"></span></div>
-        </div>
+<!-- ================= CONTROL DE TIEMPO ================= -->
+<div class="section">
+    <div class="section-title">Control de Tiempo</div>
+    <div class="grid">
+        <div class="item"><span>Fecha:</span> <span data-field="fecha"></span></div>
+        <div class="item"><span>Día Zafra:</span> <span data-field="dia_zafra"></span></div>
+        <div class="item"><span>Entrada:</span> <span data-field="hora_entrada"></span></div>
+        <div class="item"><span>Salida:</span> <span data-field="hora_salida"></span></div>
     </div>
+</div>
 
-    <!-- PESOS -->
-    <div class="section">
-        <div class="section-title">Pesos</div>
-        <div class="pesos-grid">
-            <div class="item"><span>Bruto:</span> <span data-field="peso_bruto"></span> Kg</div>
-            <div class="item"><span>Tara:</span> <span data-field="tara"></span> Kg</div>
-            <div class="item"><span>Neto:</span> <span data-field="peso_neto"></span> Kg</div>
-        </div>
-    </div>
+<!-- ================= TRANSPORTE ================= -->
+<div class="section">
+    <div class="section-title">Transporte</div>
+    <div class="grid">
+        <div class="item"><span>Placa:</span> <span data-field="placa"></span></div>
+        <div class="item"><span>Transportista:</span> <span data-field="transportista"></span></div>
+        <div class="item"><span>Contrato:</span> <span data-field="contrato"></span></div>
+        <div class="item"><span>Equipo:</span> <span data-field="equipo"></span></div>
 
-    <!-- TOTAL -->
-    <div class="total">
-        Total: <span data-field="toneladas"></span> Ton
-    </div>
+        <div class="item"><span>Tractor 1:</span> <span data-field="tractor1"></span></div>
+        <div class="item"><span>Empleado Tractor 1:</span> <span data-field="empleado_tractor1"></span></div>
 
-    <!-- PIE -->
-    <div class="footer">
-        <div>Pesador: <span data-field="pesador"></span></div>
-        <div>Generado automáticamente</div>
+        <div class="item"><span>Tractor 2:</span> <span data-field="tractor2"></span></div>
+        <div class="item"><span>Empleado Tractor 2:</span> <span data-field="empleado_tractor2"></span></div>
+
+        <div class="item"><span>Alce 1:</span> <span data-field="alce1"></span></div>
+        <div class="item"><span>Empleado Alce 1:</span> <span data-field="empleado_alce1"></span></div>
+
+        <div class="item"><span>Alce 2:</span> <span data-field="alce2"></span></div>
+        <div class="item"><span>Empleado Alce 2:</span> <span data-field="empleado_alce2"></span></div>
+
+        <div class="item"><span>Montacargas:</span> <span data-field="montacargas"></span></div>
+        <div class="item"><span>Empleado Montacargas:</span> <span data-field="empleado_montacargas"></span></div>
     </div>
+</div>
+
+<!-- ================= PESOS ================= -->
+<div class="section">
+    <div class="section-title">Pesos</div>
+    <div class="pesos-grid">
+        <div class="item"><span>Bruto:</span> <span data-field="peso_bruto"></span> Kg</div>
+        <div class="item"><span>Tara:</span> <span data-field="tara"></span> Kg</div>
+        <div class="item"><span>Neto:</span> <span data-field="peso_neto"></span> Kg</div>
+    </div>
+</div>
+
+<!-- ================= TOTAL EN ESQUINA ================= -->
+<div class="total">
+    <div class="label">Total</div>
+    <div class="valor">
+        <span data-field="toneladas"></span>
+        <span class="unidad">Ton</span>
+    </div>
+</div>
+
+<!-- ================= PIE ================= -->
+<div class="footer">
+    <div>Pesador: <span data-field="pesador"></span></div>
+    <div>Generado automáticamente</div>
+</div>
 
 </div>
 
 <script>
-function getParams() {
-    const p = {};
-    new URLSearchParams(window.location.search).forEach((v, k) => p[k] = v);
+function getParams(){
+    const p={};
+    new URLSearchParams(window.location.search)
+        .forEach((v,k)=>p[k]=v);
     return p;
 }
 
-function fillData() {
-    const p = getParams();
-    document.querySelectorAll("[data-field]").forEach(el => {
-        const field = el.dataset.field;
-        if (p[field] !== undefined) el.textContent = decodeURIComponent(p[field]);
+function fillData(){
+    const p=getParams();
+
+    document.querySelectorAll("[data-field]").forEach(el=>{
+        const f=el.dataset.field;
+        if(p[f]!==undefined) el.textContent=decodeURIComponent(p[f]);
     });
-    if (p.numero_guia) {
-        const qrImg = document.getElementById("qr");
-        qrImg.src = "https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=" + encodeURIComponent(p.numero_guia);
-        qrImg.onload = () => setTimeout(() => window.print(), 200);
-    } else {
-        setTimeout(() => window.print(), 200);
+
+    const qr=document.getElementById("qr");
+    if(p.numero_guia){
+        qr.src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data="
+              +encodeURIComponent(p.numero_guia);
+        qr.onload=()=>setTimeout(()=>window.print(),200);
+    }else{
+        setTimeout(()=>window.print(),200);
     }
 }
-window.onload = fillData;
+
+window.onload=fillData;
 </script>
 
 </body>
