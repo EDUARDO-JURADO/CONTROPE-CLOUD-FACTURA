@@ -101,25 +101,16 @@ body{
     font-size:11px;
 }
 
-/* ================= TOTAL TONELADAS (ESQUINA) ================= */
+/* ================= TOTAL TONELADAS ================= */
 .total{
     margin-top:6px;
     text-align:right;
     font-weight:bold;
 }
 
-.total .label{
-    font-size:13px;
-}
-
-.total .valor{
-    font-size:28px;
-    line-height:1;
-}
-
-.total .unidad{
-    font-size:14px;
-}
+.total .label{font-size:13px;}
+.total .valor{font-size:28px; line-height:1;}
+.total .unidad{font-size:14px;}
 
 /* ================= PIE ================= */
 .footer{
@@ -146,7 +137,6 @@ body{
         <div class="factura-box">
             No. <span data-field="numero_guia"></span>
         </div>
-
     </div>
 
     <div class="qr-header">
@@ -173,7 +163,6 @@ body{
         <div class="item"><span>Proveedor:</span> <span data-field="proveedor"></span></div>
         <div class="item"><span>Variedad:</span> <span data-field="variedad"></span></div>
         <div class="item"><span>Subdivisión:</span> <span data-field="subdivision"></span></div>
-        <div class="item"><span>UP:</span> <span data-field="up"></span></div>
         <div class="item"><span>Frente:</span> <span data-field="frente"></span></div>
     </div>
 </div>
@@ -225,7 +214,7 @@ body{
     </div>
 </div>
 
-<!-- ================= TOTAL EN ESQUINA ================= -->
+<!-- ================= TOTAL ================= -->
 <div class="total">
     <div class="label">Total</div>
     <div class="valor">
@@ -273,3 +262,4 @@ window.onload=fillData;
 
 </body>
 </html>
+
